@@ -1,0 +1,10 @@
+<div class="navbar">
+  <div class="navbar-inner">
+    <ul class="nav nav-pills">
+      <li><a href="<%= layers_path %>">Layers</a></li><span class="divider">></span>
+      <li><a href="<%= layer_path(@layer) %>"><%= @layer.name %></a></li><span class="divider">></span>
+      <li class="active"><a><span class="label label-warning pull-left">EDIT</span> '<%= @interaction.label %>' Action</a></li>
+    </ul>
+  </div>
+</div>
+<%= render :partial => "form" %>

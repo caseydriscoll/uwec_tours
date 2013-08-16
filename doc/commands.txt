@@ -1,0 +1,29 @@
+rm db/development.sqlite3 && rake db:migrate
+
+--- models ---
+
+rails g model layer name:string type:string radius:integer refreshInterval:integer refreshDistance:integer fullRefresh:boolean showMessage:string title:string description:string iconUrl:string biwStyle:string
+
+rails g model hotspot latitude:float longitude:float altitude:float title:string description:string footnote:string image_url:string showSmallBiw:boolean showBiwOnClick:boolean biwStyle:string ciwIcon_url:string ciwIcon_type:integer inFocus:boolean
+
+rails g model hotspot_object contentType:string hotspot_object_url:string size:float reducedUrl:string previewImage:string rotateRel:boolean rotateAxisX:float rotateAxisY:float rotateAxisZ:float rotateAngle:float translateX:float translateY:float translateZ:float scale:float
+
+rails g model action uri:string label:string contentType:string method:string params:string activityType:integer showActivity:boolean activityMessage:string closeBiw:boolean autoTriggerRange:integer autoTrigger:boolean autoTriggerOnly:boolean actionable_id:integer actionable_type:string
+
+rails g model animation event:string type:string length:integer delay:integer interpolationParam:float interpolation:string persist:boolean repeat:boolean from:float to:float axisX:float axisY:float axisZ:float animatable_id:integer animatable_type:string
+
+
+--- controllers ---
+
+rails g controller Layers index create edit update delete show
+
+rails g controller Hotspots index create edit update delete show
+
+rails g controller Hotspot_objects index create edit update delete show
+
+rails g controller Actions index create edit update delete show
+
+rails g controller Animations index create edit update delete show
+
+
+--- views ---

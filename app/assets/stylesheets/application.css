@@ -1,0 +1,223 @@
+.well {
+	-moz-box-sizing:border-box;
+	-webkit-box-sizing:border-box;
+	box-sizing:border-box;
+}
+
+i[class*=" icon-"] {
+	margin: -4px 2px 0px -4px !important;
+}
+
+.nav [class^="icon-"] {
+	line-height: .8em;
+}
+
+body {
+  margin-top: 10px;
+	background: url("cream_dust.png");
+}
+
+h2 .btn {
+  margin: -5px 2px 2px 2px;
+}
+h2 .button_to {
+	display: inline-block;
+}
+
+.button_to {
+	margin-bottom: 0px;
+}
+.btns {
+	margin: 0px auto;
+	text-align: center;
+	width: 66px;
+	}
+	.btns .btn {
+		margin: 2px;
+		width:50px;
+	}
+	.btns input.btn {
+		width:64px;
+	}
+
+.table { background: white; }
+
+.table th, td.hotspots h1,
+.table th, td.actions h1,
+.table th, td.animations h1 {
+  text-align: center;
+}
+.table td.title h2 {
+	margin: 7px;
+}
+.table td.title h5 {
+	margin: 0px 0px 0px 10px;
+	font-style: italic;
+}
+.table td.latlon h4 {
+	margin: 5px 5px 5px 10px;
+}
+
+dd {
+  min-height: 20px;
+}
+
+ul.nav li span.label {
+  margin: -4px 3px 0px -6px;
+}
+
+.navbar .navbar-inner {
+  padding: 5px 10px;
+  }
+	.navbar .navbar-inner ul.nav > li.active {
+	}
+  .navbar .navbar-inner ul.nav > li.active a {
+		border: 1px solid #aaa;
+    /*color: #444444;*/
+  }
+  .navbar .navbar-inner ul.nav > li > a {
+    font-size: 21px;
+    margin: 5px 3px;padding: 8px 10px;
+    /*
+		color: #f2f2f2;
+    text-shadow: none;
+  	*/
+	}
+  ul.nav .divider {
+    display: inline-block;
+    float: left;
+    padding: 8px 4px;
+    font-size: 21px;
+    /*
+		color: #f2f2f2;
+  	*/
+	}
+  ul.nav .label {
+    display: inline-block;
+    margin: 9px 5px; padding: 4px 6px;
+  }
+
+.navbar-inner {
+  min-height: 40px;
+  padding-right: 20px;
+  padding-left: 20px;
+}
+
+
+.field_with_errors { display: inline; }
+.form-horizontal .control-label { width: 115px;}
+.form-horizontal .controls { margin-left: 135px;}
+
+select.input-medium { width: 164px;}
+
+textarea { resize: none;}
+
+dl {
+	font-size: 16px;
+	}
+	dl.hsinfo dt { width: 180px; }
+	dl.hsinfo dd { margin-left: 190px;}	
+
+.table td.btn-group-vertical {
+}
+.table dl {
+  margin: 10px 3px 3px;
+  }
+  .table dl dt {width: 120px;}
+  .table dl dd {margin-left: 130px;}
+  .table .lyshow.latlon dl dt {
+		width: 40px;}
+	.table .lyshow.latlon dl dd {
+		margin-left: 50px;}
+  .table .hsshow.latlon dl dt {
+		width: 90px;}
+	.table .hsshow.latlon dl dd {
+		margin-left: 100px;}
+	
+
+	.table .btn-group-vertical {
+    width: 50%;
+  }
+
+
+.gllpLatlonPicker .form-inline label {
+	margin: 15px 0px 0px 18px;
+}
+   
+.opthotset {
+	margin: 10px 0px 0px 0px;
+}
+.opthotset label {
+	margin: 0px 0px 0px 13px;
+}
+
+#hotspottabs {
+	margin: 20px 0 0 0;
+	}
+	#hotspottabs a {
+		color: #222;
+	}
+
+
+.tab-pane {
+	background: #fff;
+	min-height: 300px;
+	margin-bottom: 20px;
+	padding: 20px;
+	border-left: 1px solid #ddd;
+	border-bottom: 1px solid #ddd;
+	border-right: 1px solid #ddd;
+	}
+	.tab-pane h3 {
+		margin-left: 30px;
+	}
+
+#actions div[class*='span'] {
+	margin-left: 45px;
+}
+
+#object div[class*='span'] {
+	margin-left: 5px;
+}
+
+#options .control-label { overflow: visible; white-space:nowrap;}
+
+.nav-list { padding-right: 0px; }
+
+.help-nav {
+	}
+	.help-nav > li {
+		float: none !important;
+		margin: 0;
+		display: block;
+		}
+		.help-nav > li a {
+			
+			}
+			.help-nav li a:hover {
+				background: white;
+				cursor: pointer;
+			}
+.help-doc {
+
+	}
+	.help-doc h2 {
+		margin: 20px;
+	}
+	.help-doc h3 {
+		margin: 20px 40px;
+	}
+	.help-doc p {
+		margin: 0px 50px 10px;
+	}
+	.help-doc ul {
+		margin: 0px 70px 10px;
+	}
+	.help-doc dl {
+		margin: 0px 50px 10px;
+		font-size: 14px;
+	}
+	.help-doc .alert {
+		margin-top: 20px;
+	}		
+

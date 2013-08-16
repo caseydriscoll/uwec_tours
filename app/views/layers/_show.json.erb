@@ -1,0 +1,68 @@
+{
+  "hotspots": [
+    <% @layer.hotspots.each do |hotspot| %>
+    {
+      "text": {
+        "title": "<%= hotspot.title %>",
+        "footnote": "<%= hotspot.footnote %>",
+        "description": "<%= hotspot.description %>"
+      },
+      "imageURL": "<%= hotspot.image_url %>",
+      "id": "<%= hotspot.id %>",
+      "anchor": {
+        "geolocation": {
+          "lat": <%= hotspot.latitude %>,
+          "lon": <%= hotspot.longitude %><% if !hotspot.altitude.blank? %>,
+          "alt": <%= hotspot.altitude %><% end %>}
+      }<% if !hotspot.interactions.blank? %>,
+      "actions": [
+      	<% hotspot.interactions.each do |interaction| %>
+        {
+          "uri": "<%= interaction.uri %>",
+          "label": "<%= interaction.label %>",
+          "activityType": <%= interaction.activityType %>,     
+          "contentType": "<%= interaction.contentType %>",     
+          "method": "<%= interaction.method %>"
+        }<%= "," unless interaction == hotspot.interactions.last %><% end %>
+      ]<% end %>
+    }<%= "," unless hotspot == @layer.hotspots.last %>
+    <% end %>
+  ],
+  <% if !@layer.interactions.blank? %>
+  "actions": [
+  <% @layer.interactions.each do |interaction| %>
+    { 
+      "uri": "<%= interaction.uri %>",
+      "label": "<%= interaction.label %>",
+      "activityType": <%= interaction.activityType %>,     
+      "contentType": "<%= interaction.contentType %>",     
+      "method": "<%= interaction.method %>"
+    }<%= "," unless interaction == @layer.interactions.last %>
+  <% end %>
+  ],
+  <% end %>
+  "layer": "<%= @layer.name %>",<%= if !@layer.showMessage.blank? then "\n  \"showMessage\": \"#{@layer.showMessage}\",".html_safe end %>
+  "biwStyle": "<%= @layer.biwStyle %>",
+  "fullRefresh": <%= @layer.fullRefresh %>,<%= if !@layer.radius.blank? then "\n  \"radius\": #{@layer.radius},".html_safe end %><%= if !@layer.refreshInterval.blank? then "\n  \"refreshInterval\": #{@layer.refreshInterval},".html_safe end %><%= if !@layer.refreshDistance.blank? then "\n  \"refreshDistance\": #{@layer.refreshDistance},".html_safe end %><% if !@layer.title.blank? %>
+	"showDialog": {
+    "title": "<%= @layer.title %>",
+    "description": "<%= @layer.description %>",
+		"iconUrl": "<%= @layer.iconUrl %>",<% if !@layer.interactions.blank? %>
+    "actions": [
+    <% @layer.interactions.each do |interaction| %>
+      { 
+        "uri": "<%= interaction.uri %>",
+        "label": "<%= interaction.label %>",
+        "activityType": <%= interaction.activityType %>,     
+        "contentType": "<%= interaction.contentType %>",     
+        "method": "<%= interaction.method %>"
+      }<%= "," unless interaction == @layer.interactions.last %>
+    <% end %>
+    ],
+  <% end %>
+  },<% end %>	
+  "errorCode": 0, 
+  "errorString": "ok", 
+  "morePages": false, 
+  "nextPageKey": null
+}

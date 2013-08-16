@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Layar</title>
+<link href="/assets/application.css" media="all" rel="stylesheet" type="text/css">
+<script src="/assets/application.js" type="text/javascript"></script>
+</head>
+<body>
+
+<h1>Tours</h1>
+
+<table class="table">
+<tr>
+<th></th>
+    <th>Tour Name</th>
+    <th>Type</th>
+    <th>Hotspots</th>
+    <th>Action</th>
+    <th>Animation</th>
+  </tr>
+<tr>
+<td>#1</td>
+    <td>UWEC Main Tour</td>
+    <td>Geo</td>
+    <td>1</td>
+    <td></td>
+    <td></td>
+    <td><a href="/layers/1">Show</a></td>
+    <td><a href="/layers/1/edit">Edit</a></td>
+    <td><a href="/layers/1" data-method="delete" rel="nofollow">Delete</a></td>
+  </tr>
+</table>
+<form accept-charset="UTF-8" action="/layers" class="new_layer" id="new_layer" method="post">
+<div style="margin:0;padding:0;display:inline"><input name="utf8" type="hidden" value="✓"></div>
+  <label for="layer_layer_name">Tour name</label>
+  <input id="layer_layer_name" name="layer[layer_name]" size="30" type="text"><input name="commit" type="submit" value="Create Tour">
+</form>
+
+</body>
+</html>

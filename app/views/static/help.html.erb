@@ -1,0 +1,219 @@
+<div class="container">
+
+	<div class="row">
+		<div class="span3" data-spy="affix" data-offset-top="0">
+			<a href="/layers" class="btn btn-large btn-block"><i class="icon icon-reply"></i> Back to Layers</a>
+			<br />
+			<ul class="nav nav-list nav-stacked well help-nav span3">
+				<li class="nav-header"><a href="#Overview">Overview</a></li>
+				<li><a href="#Introduction">Introduction</a></li>
+				<li><a href="#Glossary">Glossary</a><li>
+				<li class="nav-header"><a href="#Requirements">Requirements</a></li>
+				<li><a href="#HotspotDatabase">1. Hotspot Database</a></li>
+				<li><a href="#LayarPublication">2. Layar.com Publication</a></li>
+				<li><a href="#StaticWebServer">3. Static Web Server</a></li>
+				<li class="nav-header"><a href="#Tutorials">Tutorials</a></li>
+				<li><a href="#CreateaVirtualTour">Create a Virtual Tour</a></li>
+				<ul class="nav nav-list nav-stacked">
+					<li><a href="#CreateaLayer">Create a Layer</a></li>
+					<li><a href="#AddaHotspot">Add a Hotspot</a></li>
+					<li><a href="#AddaHotspotObject">Add a Hotspot Object</a></li>
+					<li><a href="#AddaHotspotAction">Add a Hotspot Action</a></li>
+					<li><a href="#AddaHotspotAnimation">Add a Hotspot Animation</a></li>
+				</ul>
+				<li><a href="#RegisteraVirtualTour">Register a Virtual Tour</a></li>
+				<ul class="nav nav-list nav-stacked">
+					<li><a href="#LayarLogin">Login to Layar</a></li>
+					<li><a href="#RegisteraLayer">Register a Layer</a></li>
+					<li><a href="#EditaLayer">Edit a Layer</a></li>
+					<li><a href="#TestaLayer">Test a Layer</a></li>
+					<li><a href="#PublishaLayer">Publish a Layer</a></li>
+				</ul>
+				<li><a href="#CreateaDigitalAsset">Create a Digital Asset</a><li>
+				<ul class="nav nav-list nav-stacked">
+					<li><a href="#CreateaHotspotImage">Create a Hotspot Image</a></li> 
+					<li><a href="#CreateanInfoPage">Create an Info Page</a></li>
+				</ul>
+			</ul>
+		</div>
+		<div class="span9 offset3 well help-doc">
+			<h1 id="Overview">Overview</h1>
+				<p class="alert alert-error"><i class="icon icon-book icon-large"></i> These documents are only supplementary to the official Layar.com documentation. Read <a href="https://layar.com/documentation/browser/layar-platform-overview/" target="_blank">their documentation</a> about layers on Layar.com for the best information. There is no substitute for learning their API; the best advice is to thoroughly disect their help documentation. It is quite good.</p>
+			<h2 id="Introduction">Introduction</h2>
+			<p>Hello! This project started in the summer of 2012 as a way to bring a "Virtual Tour" to the University of Wisconsin-Eau Claire campus. No one really knew what that meant at the time, as there were many technologies available to fulfill this idea. We figured out our foundational requirements, to focus on the capabilities of our final product.</p>
+			<p>We decided our end product must:</p>
+			<a href="http://www.uwec.edu/admissions/layar/uwecmaintour/screenshots/screens/1.jpg" class="thumbnail span2 pull-right"><img src="http://www.uwec.edu/admissions/layar/uwecmaintour/screenshots/screens/1.jpg" />View of an Android device of hotspots in January of 2013.</a>
+			<ul class="unstyled">
+				<li>Offer a media rich experience</li>
+				<li>Be available ONLY on the UW-EC campus</li>
+				<li>Showcase UW-EC LTS capabilities</li>
+			</ul>
+			<p>Additionally, it was decided early on that the entire tour system:</p>
+			<ul class="unstyled">
+				<li>Must be expandable through the creation of multiple tours</li>
+				<li>Non-technical users must be able to easily create and edit tours</li>
+			</ul>
+
+			<p>For these reasons, we decided to create a <a href="http://layar.com" target="_blank"> Layar.com brand</a> Augmented Reality system. Layar is a software "app" available (as of January 2013) on Apple's iOS App Store and Google's Android Play Market for use on a "smart" digital device like a phone or tablet. Layar uses GPS coordinates to locate "hotspots" of information close to the smart device, and then "augments" (adds value to) the user's "reality" by placing the information hotspots in their field of visions.</p> 
+			<h2 id="Glossary">Glossary</h2>
+			<dl>
+				<dt>Hotspot</dt>
+					<dd>A Point of Interest at a specific geolocation that contains: coordinates, title, description, and an image along with other information.<dd>
+				<dt>JSON</dt>
+					<dd>A file type used for transfering data from one web application to another. Used in this system to transfer tour and point of interest data stored in this app to smart devices.<dd>
+				<dt>Layar.com</dt>
+					<dd>The company and website to official register virtual tours.<dd>
+				<dt>Layer</dt>
+					<dd>A collection of hotspots otherwise known as a tour.<dd>
+				<dt></dt>
+					<dd><dd>
+			</dl>
+
+			<h1 id="Requirements">Requirements</h1>
+			<p>There are three pieces of technology required for a successfully published tour: this hotspot database (a web app built on Ruby on Rails), publication by the Layar.com servers, and a static asset server to store additional digital media assets (html files, videos, pictures, etc).</p>
+			<p class="thumbnails">
+				<img class="thumbnail span6" src="<%= asset_path('stack.png')%>" />
+			</p>
+			<h2 id="HotspotDatabase">1. Hotspot Database</h2>
+			<p>This web app, the hotspot database, stores tour data in the form of layers. Each tour (layer) has several points of interest (hotspots), each point of interest contains several pieces of information including its name, description and geolocation.</p>
+			<p>The tour information stored in this web app is publicly accessible in a specific type of data file called a JSON feed. Each layer has its own public feed that displays all of its content. For example, the data for "UWEC Main Tour" can be viewed at <a href="http://tours.apps.uwec.edu/layers/1.json" target="_blank">http://tours.apps.uwec.edu/layers/1.json</a>. When information in the database is updated, the JSON file is automatically updated.</p>
+			<h2 id="LayarPublication">2. Layar.com Puplication</h2>
+			<p>Since Layar owns and runs the app on the devices, it must know where to find the tours we wish to publish. For every tour we create we must register them at <a href="http://www.layar.com" target="_blank">Layar.com</a>. Contact the LTS Help Desk for the official UW-EC account credentials if you do not already have them.</p>
+			<p>When you register the virtual tour in the <a href="http://www.layar.com" target="_blank">Layar.com account</a>, you will add in the layer's JSON. This is how the app on the smart device knows where to place the hotspots.</p> 	
+			<h2 id="StaticWebServer">3. Static Web Server</h2>
+			<a class="thumbnail span3 pull-right" target="_blank" href="http://www.uwec.edu/admissions/layar/logos/uwec_logo_screenshot_480x320.png"><img src="http://www.uwec.edu/admissions/layar/logos/uwec_logo_screenshot_480x320.png" />An image asset stored on the "Lucy" drive.</a>
+			<p>Digital assets used in the virtual tours like images, movies, audio and html pages are stored on a separate server. This is stored on the "Lucy" drive, a public facing webserver. For example, the Admissions department's "Lucy" server is accessible by mapping the lucy.uwec.edu/admissions$ drive. Once you have access go to the /public/layar folder. Everything stored there is accessible from any public computer at http://www.uwec.edu/admissions/layar/&lt;filename&gt;.</p>
+			<p>When adding digital assets to tours, they must be stored here first, then added by URL to the database. Examples in the tutorial to follow.</p>
+			<p>To get access to your department's "Lucy" drive (or other public server if they are decommissioned), contact the LTS Help Desk.</p>
+
+			<h1 id="Tutorials">Tutorials</h1>
+			<h2 id="CreateaVirtualTour">Create a Virtual Tour</h2>
+				<h3 id="CreateaLayer">Create a Layer</h3>
+				<p>Creaing a Layer is easy, on the <a href="<%= layers_path() %>">Layers page</a> simply type in the name and click the "Create Layer" button.</p>
+				<p class="thumbnails"><img class="thumbnail span6" src="<%= asset_path('create_layer.png') %>" /></p>
+				<p class="alert alert-error span6"><i class="icon icon-warning-sign"></i> A Layer name must be unique and not already used.</p>
+				<h3 id="AddaHotspot">Add a Hotspot</h3>
+				<p class="alert alert-info"><i class="icon icon-book"></i> Read <a href="http://layar.com/documentation/browser/api/getpois-response/hotspots" target="_blank">the documentation</a> about hotspots on Layar.com for more info</p>
+				<p>To create a hotspot for a layer (layer must already exist), click the layer's "Add Info" button  on the <a href="<%= layers_path() %>">Layers page</a>.</p>
+				<p class="thumbnails"><img class="thumbnail span6" src="<%= asset_path('add_layer_info.png') %>" /></p>
+				<p>Then click the "Add Hotspot" button on the top left of the "Add info page".</p>
+				<p class="thumbnails"><img class="thumbnail span6" src="<%= asset_path('add_layer_hotspot.png') %>" /></p>
+				<p>On the "Create Hotspot" page, you'll be able to alter many pieces of hotspot information. Some information will be used more than others, some won't be used at all. It is recommended that you read the full <a href="http://layar.com/documentation/browser/api/getpois-response/hotspots/" target="_blank">Layar Documentation</a> about hotspots on their website to understand the depth of information hotspots can hold.</p>
+				<a class="thumbnail span1 pull-right" target="_blank" href="<%= asset_path('biw.png') %>"><img src="<%= asset_path('t_biw.png') %>" /></a>
+				<p>Fill in each required section. The highlighted information below is required (or atleast highly recommended) and will be featured on the hotposts "BIW" (Brief Info Widget).</p>
+				<p>Click the image on the right to see the BIW in action</p>
+				<dl>
+					<dt><span class="label label-important">Required</span> Title</dt>
+							<dd>The title must be short and unique.</dd>
+					<dt><span class="label label-important">Required</span> Footnote</dt>
+						<dd>The footnote should be used to add a small piece of supporting info. It must very short, typically less than 40 characters.</dd>
+					<dt><span class="label label-important">Required</span> Description</dt>
+						<dd>The should give a brief synopsis of the hotspot, but limited to about 140 characters. Generally, the text should fit in the input box without overflowing.</dd>
+					<dt><span class="label label-important">Required</span> Image url</dt>
+						<dd>The image (100px wide by 75px tall) must be stored on the <a>Static Asset Server</a>. Enter the url in this box. For example, the for the "Footbridge" hotspot, the thumbnail image is stored on the Admissions "Lucy" drive in /public/layar/uwecmaintour/images/ with a name of "footbridge.jpg". Therefore, the "Image URL" you enter in this box is <a href="http://www.uwec.edu/admissions/layar/uwecmaintour/images/footbridge.jpg">"http://www.uwec.edu/admissions/layar/uwecmaintour/images/footbridge.jpg"</a>. You can verify that is the url listed <a href="/layers/1/hotspots/10/edit">here</a>.</dd>
+					<dt><span class="label label-important">Required</span> Latitude & Longitude</dt>
+						<dd>To enter the "Lat" and "Lon" for the hotspot, simply double click on the location on the map. It will automatically enter the Latitude and Longitude.</dd>
+				</dl>
+				<p class="thumbnails"><img class="thumbnail span6" src="<%= asset_path('hotspot_latlon.png') %>" /></p>
+				<dl>
+					<dt><span class="label label-info">Optional</span> Altitude</dt>
+						<dd>Altitude (or elevation) is measured in meters above sea level. Ground level is about 230 on lower campus, 250 on upper. More than likely you can leave it blank, the default settings will load it at eye level.</dd>
+					<dt><span class="label label-info">Optional</span> Object, Action, Animation, Settings</dt>
+						<dd>These are not required to create a hotspot and are covered in future tutorials.</dd>
+				</dl>
+				<p>Click "Create Hotspot" to save the information and view for correctness</p>
+				<p class="thumbnails"><img class="thumbnail span6" src="<%= asset_path('hotspot_create.png') %>" /></p>
+				<h3 id="AddaHotspotObject">Add a Hotspot Object</h3>
+				<p class="alert alert-warning"><i class="icon icon-exclamation-sign"></i> This is an advanced feature. You will never add a hotspot object.</p>
+				<p>Hotspot objects are an advanced feature. Every hotspot can have one and only one object. An object is a 2D image or icon, a 3D model of a digital object (like a building), or video. The object is placed right in the user's field of view, ready for them to interact with.</p>
+				<h3 id="AddaHotspotAction">Add a Hotspot Action</h3>
+				<p class="alert alert-info"><i class="icon icon-book"></i> Read <a href="http://layar.com/documentation/browser/api/getpois-response/actions/" target="_blank">the documentation</a> about actions on Layar.com for more info</p>
+				<p>When a hotspot is selected, you have the option of adding action buttons to their BIW (Brief Info Window). Example actions include: calling a number, listening to audio, or viewing a website (info page).</p>
+				<p>Typically, for our use in creating virtual tours, you will only create actions to view html pages for "More information".</p>
+				<p>To add an action to a hotspot, while creating a new one or editing an old one, click the "Action" tab and enter the required information:</p>
+				<dl>
+					<dt><span class="label label-important">Required</span> Label</dt>
+						<dd>The label is the text shown to the user on the BIW.</dd>
+					<dt><span class="label label-important">Required</span> URI</dt>
+						<dd>Similar to the hotspot's "Image URL", the action's "URI" is the internet address of the action's destination url, stored on the asset server.</dd>
+				</dl>
+				<dl>
+						<p class="thumbnails pull-right">
+							<a class="thumbnail span1" href="<%= asset_path('action.png') %>"><img src="<%= asset_path('t_action.png') %>" /></a>
+							<a class="thumbnail span1" href="<%= asset_path('actionscreen.png') %>"><img src="<%= asset_path('t_actionscreen.png') %>" /></a>
+						</p>
+						<dd>For example as depicted on the images to the right, the "Zorn Arena" has an added hotspot action, a button labeled "More Info" that leads to an info page. There is a simple html file called "zornarena.html" stored on the Admission's "Lucy" drive in the "/public/layar/uwecmaintour/" folder. Therefore, The html page it links to is hosted on the static asset server at <a href="http://www.uwec.edu/admissions/layar/uwecmaintour/zornarena.html" target="_blank">uwec.edu/admissions/layar/uwecmaintour/zornarena.html,</a> and that is the "URI" listed in the <a href="/layers/1/hotspots/6/edit">"Zorn Arena"</a> hotspot action URI box. </dd> 
+				</dl>
+				<dl>
+					<dt>
+						<span class="label label-important">Required</span>
+						<span class="label label-success">Automatic</span> Content Type</dt>
+						<dd>Select the appropriate file type the action button will call. Leave this alone, you are most likely calling an html file, which is set by default.</dd>
+					<dt>
+						<span class="label label-important">Required</span>
+						<span class="label label-success">Automatic</span> Activity Type</dt>
+						<dd>Select the type of activity the action button will call. Each option depicts a different graphic as show on <a href="http://static.layar.com/content_media/167/activityType_icons.png">this chart</a> provided by Layar. By default, the "i" for information will be displayed.</dd>
+				</dl>
+				<p class="thumbnails"><img class="thumbnail span6" src="<%= asset_path('hotspot_new_action.png') %>" /></p>
+				<p class="alert alert-warning"><i class="icon icon-exclamation-sign"></i> Feel free to leave the rest of the action options alone unless you have read the Layar documentation and know what you are doing.</p>
+				<h3 id="AddaHotspotAnimation">Add a Hotspot Animation</h3>
+				<p class="alert alert-warning"><i class="icon icon-exclamation-sign"></i> This is an advanced feature. You will never add a hotspot animation.</p>
+			<h2 id="RegisteraVirtualTour">Register a Virtual Tour</h2>
+				<p class="alert alert-info"><i class="icon icon-book"></i> Read <a href="https://layar.com/documentation/browser/publishing-site/" target="_blank">the documentation</a> about registering layers on Layar.com for all info</p>
+				<p>Once the tour is created in the hotspot database app, you must register it on <a href="http://layar.com" target="_blank">Layar.com</a>. This makes it available for download in the Layar mobile app.</p>
+				<h3 id="LayarLogin">Login to  Layar.com</h3>
+				<p>First, go to <a href="http://layar.com/" target="_blank">Layar.com</a> and login with these credentials:</p>
+				<p class="thumbnails"><img class="thumbnail span6" src="<%= asset_path('layar_login.png') %>" /></p>
+				<dl>
+					<dt>Username:</dt>
+						<dd>layartour@uwec.edu</dd>
+					<dt>Password:</dt>
+						<dd>You either already have the password, or can get it by contacting Matt Sias, the Mobile Computing Expert, or LTS Help Desk.</dd>
+				</dl>
+				<p class="thumbnails"><img class="thumbnail span6" src="<%= asset_path('layar_username.png') %>" /></p>
+				<p>At the top, click "My Layers" to enter main system.</p>
+				<p class="thumbnails"><img class="thumbnail span6" src="<%= asset_path('layar_my_layers.png') %>" /></p>
+				<h3 id="RegisteraLayer">Register a Layer</h3>
+				<p>On the "My Layers" page, click "Create a new layer!"</p>
+				<p class="thumbnails"><img class="thumbnail span6" src="<%= asset_path('layar_create_new.png') %>" /></p>
+				<p>Fill in the required information, following the hover instructions on the form along with this information:</p>
+				<dl>
+					<dt>Layer name:</dt>
+					<dd>Must be all lower case, no spaces. For example: uwecmaintour</dd>
+					<dt>Title:</dt>
+						<dd>Must be same name as "Layer name" above, but appropriately capitalized for style. For example: UWEC Main Tour.</dd>
+				</dl>
+				<p class="alert alert-error"><i class="icon icon-warning-sign"></i> "Title" must be identical to the Layer's "<a href="#CreateaLayer">Title</a>" in the hotspot database.</p>
+				<dl>
+					<dt>Short Description:</dt>
+						<dd>VERY short description, 60 characters max. This is what the user reads right before downloading the tour.</dd>
+					<dt><span class="label label-success">Automatic</span> Publisher Name:</dt>
+						<dd>This should already be entered as "UWEC LTS"</dd>
+					<dt><span class="label label-important">Important!</span> API Endpoint URL:</dt>
+					<dd>This is the url that points to the layer's json page in the <a href="#HotspotDatabase">hotspot database</a>. In the "add info" section of each layer, there is a grey <span class="btn"><i class="icon icon-align-justify"></i> .json</span> button. Click that to enter the page and copy the url (or you may need to right-click "Copy shortcut" in Internet Explorer). For example, the full "API Endpoint URL" .json link for "UWEC Main Tour" is at <a href="/layers/1.json">http://tours.apps.uwec.edu/layers/1.json"</a></dd>
+					<dt><span class="label label-success">Automatic</span> Layer type:</dt>
+						<dd>Leave the default choice "Generic (2D)" selected.</dd>
+					<dt><span class="label label-success">Automatic</span> Layer vision:</dt>
+						<dd>Leave this unchecked</dd>
+				</dl>
+				<p class="thumbnails"><img class="thumbnail span6" src="<%= asset_path('layar_create_layer.png') %>" /></p>
+				<h3 id="EditaLayer">Edit a Layer</h3>
+				<p class="alert alert-info"><i class="icon icon-book"></i> Read <a href="https://layar.com/documentation/browser/publishing-site/edit-layer/" target="_blank">the documentation</a> about layer data on Layar.com for more info</p>
+				<p>On the "My Layers" page, click "Edit" to edit all layer information.</p>
+				<p class="thumbnails"><img class="thumbnail span6" src="<%= asset_path('layar_edit_layer.png') %>" /></p>
+				<h3 id="TestaLayer">Test a Layer</h3>
+				<p class="alert alert-info"><i class="icon icon-book"></i> Read <a href="https://layar.com/documentation/browser/publishing-site/test-layer/" target="_blank">the documentation</a> about testing layers on Layar.com for more info</p>
+				<p class="thumbnails"><img class="thumbnail span6" src="<%= asset_path('layar_test_layer.png') %>" /></p>
+				<h3 id="PublishaLayer">Publish a Layer</h3>
+				<p class="alert alert-info"><i class="icon icon-book"></i> Read <a href="https://layar.com/documentation/browser/publishing-site/request-publication/" target="_blank">the documentation</a> about publishing layers on Layar.com for more info</p>
+				<p>Publish a completed layer by clicking "Request Approval" on the "My Layers" page.</p>
+				<p class="thumbnails"><img class="thumbnail span6" src="<%= asset_path('layar_publish_layer.png') %>" /></p>
+				<p>A dialog box will tell you what steps you need to take in order to successfully publish the layer. Complete the steps by <a href="#EditaLayer">editing</a> the layer's metadata.</p>
+			<h2 id="CreateaDigitalAsset">Create a Digital Asset</h2>
+				<p>Read <a href="#StaticWebServer">Static Web Server</a> to better understand how the digitial assets fit in to application.</p>
+				<h3 id="CreateaHotspotImage">Create a Hotspot Image</h3>
+				<p>Hotspot images must be 100 pixels wide by 75 pixels tall. Talk to the LTS Help Desk for Photoshop training if necessary, or possibly the image provider.</p>
+				<h3 id="CreateanInfoPage">Create an Info Page</h3>
+				<p>"More Info" pages are stored on the Lucy drive as .html files. Open the .html files in Dreamweaver for easy editing. Feel free to experiment by adding lots of pictures and video. Keep in mind the files are purposefully simplistic the user interface should remain very clean. It is best to keep the colors black and white with minimal branding.</p>
+		</div>
+	</div>

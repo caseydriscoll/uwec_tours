@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Layar</title>
+<link href="/assets/bootstrap.css" media="screen" rel="stylesheet" type="text/css">
+<link href="/assets/application.css" media="screen" rel="stylesheet" type="text/css">
+<script src="/assets/application.js" type="text/javascript"></script>
+</head>
+<body>
+    <div class="container">
+      <div class="navbar">
+  <div class="navbar-inner">
+    <ul class="nav nav-pills">
+<li><a href="/layers">Layers</a></li>
+<span class="divider">&gt;</span>
+      <li><a href="/layers/1">Test Tour</a></li>
+<span class="divider">&gt;</span>
+      <li><a>Action</a></li>
+<span class="divider">&gt;</span>
+      <li><span class="label label-success">NEW</span></li>
+    </ul>
+</div>
+</div>
+<form accept-charset="UTF-8" action="/layers/1/axtions" class="form-horizontal" id="new_axtion" method="post">
+<div style="margin:0;padding:0;display:inline"><input name="utf8" type="hidden" value="✓"></div>
+
+  <div class="control-group">
+    <label class="control-label" for="axtion_label">Label</label>
+    <div class="controls">
+      <input id="axtion_label" name="axtion[label]" size="30" type="text">
+</div>
+  </div>
+  
+  <div class="control-group">
+    <label class="control-label" for="axtion_uri">URI</label>
+    <div class="controls">
+      <!-- <select class='input-small'>
+        <option value="http://">http://</option>
+        <option value="https://">https://</option>
+        <option value="tel:">tel:</option>
+        <option value="mailto:">mailto:</option>
+        <option value="sms:">sms:</option>
+        <option value="layar://">layar://</option>
+        <option value="layarshare://">layarshare://</option>
+        <option value=""></option>
+      </select> -->
+      <input id="axtion_uri" name="axtion[uri]" size="30" type="text">
+</div>
+  </div>
+  
+  <div class="control-group">
+    <label class="control-label" for="axtion_contentType">Content Type</label>
+    <div class="controls">
+      <select class="" id="axtion_contentType" name="axtion[contentType]"><option value="text/html">HTML</option>
+<option value="text/html">Text</option>
+<option value="audio/mpeg">Audio MPEG</option>
+<option value="audio/mp4">Audio MP4</option>
+<option value="video/mp4">Video MP4</option>
+<option value="video/3gpp">Video 3GPP</option>
+<option value="application/vnd.layar.internal">Internal Custom Call</option></select>
+</div>
+  </div>
+
+  <div class="control-group"> 
+    <label class="control-label" for="axtion_activityType">Activity Type</label>
+    <div class="controls">
+      <select class="" id="axtion_activityType" name="axtion[activityType]"><option value="1">Info</option>
+<option value="2">Audio</option>
+<option value="3">Video</option>
+<option value="4">Call</option>
+<option value="5">Email</option>
+<option value="6">Position/Map</option>
+<option value="7">Add</option>
+<option value="8">Remove</option>
+<option value="9">Edit</option>
+<option value="10">Collect</option>
+<option value="11">Play</option>
+<option value="12">Make Move</option>
+<option value="13">Share</option>
+<option value="14">Pin on Map</option>
+<option value="15">Check In/Out</option>
+<option value="16">Log In/Out</option>
+<option value="17">Lock/Unlock</option>
+<option value="18">List/Scores</option>
+<option value="19">Money/Pay/Buy</option>
+<option value="20">Open</option>
+<option value="21">Close</option>
+<option value="22">Search</option>
+<option value="23">Update</option>
+<option value="24">Layer</option>
+<option value="25">Yes</option>
+<option value="26">Increase/Decrease</option>
+<option value="27">View/Examine</option>
+<option value="28">Add to Favorites</option>
+<option value="29">Kill/Hit</option>
+<option value="30">Heal</option>
+<option value="31">Defend</option>
+<option value="32">Repair</option>
+<option value="33">Use/Switch</option>
+<option value="34">Animate</option>
+<option value="35">Scoreboard</option>
+<option value="36">Generic Action</option>
+<option value="37">No</option></select>
+</div>
+  </div>
+
+  <h3>Optional Settings</h3>
+
+  <div class="control-group">
+    <label class="control-label" for="axtion_method">Method</label>
+    <div class="controls">
+      <select class="" id="axtion_method" name="axtion[method]"><option value="GET" selected>GET</option>
+<option value="POST">POST</option></select>
+</div>
+  </div>
+
+  <div class="control-group"> 
+    <label class="control-label" for="axtion_params">Params</label>
+    <div class="controls">
+      <input id="axtion_params" name="axtion[params]" size="30" type="text">
+</div>
+  </div>
+  
+  <div class="control-group"> 
+    <label class="control-label" for="axtion_showActivity">Show Activity</label>
+    <div class="controls">
+      <input name="axtion[showActivity]" type="hidden" value="0"><input checked id="axtion_showActivity" name="axtion[showActivity]" type="checkbox" value="1">
+</div>
+  </div>
+  
+  <div class="control-group"> 
+    <label class="control-label" for="axtion_activityMessage">Activity Message</label>
+    <div class="controls">
+      <input id="axtion_activityMessage" name="axtion[activityMessage]" size="30" type="text">
+</div>
+  </div>
+  
+  <div class="control-group"> 
+    <label class="control-label" for="axtion_closeBiw">Close BIW</label>
+    <div class="controls">
+      <input name="axtion[closeBiw]" type="hidden" value="0"><input id="axtion_closeBiw" name="axtion[closeBiw]" type="checkbox" value="1">
+</div>
+  </div>
+  
+  <div class="control-group"> 
+    <label class="control-label" for="axtion_autoTriggerRange">Auto Trigger Range</label>
+    <div class="controls">
+      <input id="axtion_autoTriggerRange" name="axtion[autoTriggerRange]" size="30" type="text">
+</div>
+  </div>
+  
+  <div class="control-group"> 
+    <label class="control-label" for="axtion_autoTrigger">Auto Trigger</label>
+    <div class="controls">
+      <input name="axtion[autoTrigger]" type="hidden" value="0"><input id="axtion_autoTrigger" name="axtion[autoTrigger]" type="checkbox" value="1">
+</div>
+  </div>
+  
+  <div class="control-group"> 
+    <label class="control-label" for="axtion_autoTriggerOnly">Auto Trigger Only</label>
+    <div class="controls">
+      <input name="axtion[autoTriggerOnly]" type="hidden" value="0"><input id="axtion_autoTriggerOnly" name="axtion[autoTriggerOnly]" type="checkbox" value="1">
+</div>
+  </div>
+  
+  <input class="btn" name="commit" type="submit" value="Create Action"><a href="/layers/1" class="btn btn-danger">Cancel</a>
+
+</form>
+    </div>
+  </body>
+</html>

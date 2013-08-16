@@ -1,0 +1,320 @@
+<%= form_for [@layer, @hotspot], :html => { :class => "form-horizontal"} do |f| %>
+  <% if @hotspot.errors.any? %>
+    <div id="error_explanation" class="alert alert-error">
+      <ul>
+      <% @hotspot.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+<div class="row">
+	<div class="span12">
+		<h2>
+			<%= params[:action].capitalize %> Hotspot
+  		<%= link_to "Cancel", layer_path(@layer), :class => "btn btn-danger pull-right" %>
+  		<%= f.submit :class => "btn pull-right" %>
+		</h2>
+	</div>
+</div>
+
+<div class="row">
+	<div class="span6">
+  	<div class="control-group">
+    	<%= f.label :title, :class => 'control-label' %>
+    	<div class="controls">
+      	<%= f.text_field :title, :class => 'input-xlarge' %>
+    	</div>
+  	</div>
+
+  	<div class="control-group"> 
+    	<%= f.label :footnote, :class => 'control-label' %>
+    	<div class="controls">
+      	<%= f.text_field :footnote, :class => 'input-xlarge' %>
+    	</div>
+  	</div>
+  
+  	<div class="control-group"> 
+    	<%= f.label :description, :class => 'control-label' %>
+    	<div class="controls">
+      	<%= f.text_area :description, :class => 'input-xlarge', :rows => "4" %>
+			</div>
+ 	 	</div>
+  
+  	<div class="control-group"> 
+   	 <%= f.label :image_url, :class => 'control-label' %>
+   	 <div class="controls">
+  	    <%= f.text_area :image_url, :class => 'input-xlarge', :rows => "4" %>
+ 	   </div>
+	  </div>
+	</div>
+
+	<div class="span6">
+		<fieldset class="gllpLatlonPicker thumbnail">
+			<div class="gllpMap">Google Maps</div>
+			<input type="hidden" class="gllpZoom" value="16"/>
+
+			<div class='form-inline'>
+    		<%= f.label :latitude, "Lat:" %>
+      	<%= f.text_field :latitude, :class => 'input-small gllpLatitude' %>
+    		<%= f.label :longitude, "Lon:" %>
+      	<%= f.text_field :longitude, :class => 'input-small gllpLongitude' %>
+    		<%= f.label :altitude, "Alt:" %>
+      	<%= f.text_field :altitude, :class => 'input-mini gllpAltitude' %> 
+			</div>
+		</fieldset>
+	</div> <!-- End span7 -->
+</div> <!-- End Hotspot row with map -->
+
+<ul class="nav nav-tabs" id="hotspottabs">
+	<li><a href="#object" data-toggle="tab"><h4>Object</h4></a></li>
+	<li><a href="#actions" data-toggle="tab"><h4>Actions</h4></a></li>
+	<li><a href="#animations" data-toggle="tab"><h4>Animations</h4></a></li>
+	<li><a href="#options" data-toggle="tab"><h4><i class="icon-cog"></i> Optional Settings</h4></a></li>
+</ul>
+
+<div class="row">  
+	<div class="span12 tab-content">
+  	<div class="form-inline tab-pane" id="options"> 
+			<h3>Optional Settings</h3>
+			<div class="row">
+				<div class="span3 offset1">
+    			<div class="control-group">
+        		<%= f.label :showSmallBiw, "Show Small BIW", :class => 'control-label' %>
+						<div class="controls"><%= f.check_box :showSmallBiw, :class => 'input-medium' %></div>
+    			</div>
+    			<div class="control-group">
+        		<%= f.label :showBiwOnClick, "Show BIW on Click", :class => 'control-label' %>
+						<div class="controls"><%= f.check_box :showBiwOnClick, :class => 'input-medium' %></div>
+    			</div>
+    			<div class="control-group">
+        		<%= f.label :inFocus, "In Focus", :class => 'control-label' %>
+						<div class="controls"><%= f.check_box :inFocus, :class => 'input-medium' %></div>
+    			</div>
+				</div>
+				<div class="span4">
+    			<div class="control-group">
+        		<%= f.label :biwStyle, "BIW Style", :class => 'control-label' %>
+						<div class="controls"><%= f.text_field :biwStyle, :class => 'input-medium' %></div>
+    			</div>
+    			<div class="control-group">
+        		<%= f.label :ciwIcon_type, "CIW Icon Type", :class => 'control-label' %>
+						<div class="controls"><%= f.text_field :ciwIcon_type, :class => 'input-medium' %></div>
+    			</div>
+    			<div class="control-group">
+        		<%= f.label :ciwIcon_url, "CIW Icon URL", :class => 'control-label' %>
+						<div class="controls"><%= f.text_field :ciwIcon_url, :class => 'input-medium' %></div>
+    			</div>
+				</div>
+			</div>
+		</div> <!-- End tab-pane #options -->
+
+		<div class="form-inline tab-pane" id="object">
+			<%= f.fields_for :hotspot_object do |builder| %>
+				<% if :hotspot_object.blank? then %>
+					<h3 class="">New Object</h3>
+				<% else %>
+					<h3>Hotspot Object
+						<div class="form-inline">
+ 							<%= builder.check_box :_destroy %>
+   	 					<%= builder.label :_destroy, "Delete Object" %>
+ 						</div>
+					</h3>		
+				<% end # hotspot_object if  %>
+			
+				<div class="row">
+					<div class="span4">	
+      			<% contentTypes = { 
+        			"Generic Image" => "image/vnd.layar.generic",
+							"jpeg" => "image/jpeg",
+							"gif" => "image/gif",
+							"png" => "image/png",
+        			"3D model" => "model/vnd.layar.l3d", 
+        			"AR Video" => "video/mp4"
+      			} %>
+    				<div class="control-group">
+        			<%= builder.label :contentType, "Content Type", :class => 'control-label' %>
+							<div class="controls"><%= builder.select :contentType, contentTypes, {}, {:class => 'input-medium'} %></div>
+    				</div>
+    				<div class="control-group">
+        			<%= builder.label :hotspot_object_url, "URL", :class => 'control-label' %>
+							<div class="controls"><%= builder.text_field :hotspot_object_url, :class => 'input-medium' %></div>
+    				</div>
+    				<div class="control-group">
+        			<%= builder.label :reducedUrl, "Reduced URL", :class => 'control-label' %>
+							<div class="controls"><%= builder.text_field :reducedUrl, :class => 'input-medium' %></div>
+    				</div>
+    				<div class="control-group">
+        			<%= builder.label :size, "Size", :class => 'control-label' %>
+							<div class="controls"><%= builder.text_field :size, :class => 'input-medium' %></div>
+    				</div>
+    				<div class="control-group">
+        			<%= builder.label :previewImage, "Preview Image", :class => 'control-label' %>
+							<div class="controls"><%= builder.text_field :previewImage, :class => 'input-medium' %></div>
+    				</div>
+					</div>
+					<div class="span4">	
+    				<div class="control-group">
+        			<%= builder.label :translateX, "Translate X", :class => 'control-label' %>
+							<div class="controls"><%= builder.text_field :translateX, :class => 'input-medium' %></div>
+    				</div>
+    				<div class="control-group">
+        			<%= builder.label :translateY, "Translate Y", :class => 'control-label' %>
+							<div class="controls"><%= builder.text_field :translateY, :class => 'input-medium' %></div>
+    				</div>
+    				<div class="control-group">
+        			<%= builder.label :translateZ, "Translate Z", :class => 'control-label' %>
+							<div class="controls"><%= builder.text_field :translateZ, :class => 'input-medium' %></div>
+    				</div>
+    				<div class="control-group">
+        			<%= builder.label :scale, :class => 'control-label' %>
+							<div class="controls"><%= builder.text_field :scale, :class => 'input-medium' %></div>
+    				</div>
+					</div>
+					<div class="span4">	
+    				<div class="control-group">
+        			<%= builder.label :rotateAxisX, "Rotate Axis X", :class => 'control-label' %>
+							<div class="controls"><%= builder.text_field :rotateAxisX, :class => 'input-medium' %></div>
+    				</div>
+    				<div class="control-group">
+        			<%= builder.label :rotateAxisY, "Rotate Axis Y", :class => 'control-label' %>
+							<div class="controls"><%= builder.text_field :rotateAxisY, :class => 'input-medium' %></div>
+    				</div>
+    				<div class="control-group">
+        			<%= builder.label :rotateAxisZ, "Rotate Axis Z", :class => 'control-label' %>
+							<div class="controls"><%= builder.text_field :rotateAxisZ, :class => 'input-medium' %></div>
+    				</div>
+    				<div class="control-group">
+        			<%= builder.label :rotateAngle, "Rotate Angle", :class => 'control-label' %>
+							<div class="controls"><%= builder.text_field :rotateAngle, :class => 'input-medium' %></div>
+    				</div>
+    				<div class="control-group">
+        			<%= builder.label :rotateRel, "Rotation Relative", :class => 'control-label' %>
+							<div class="controls"><%= builder.check_box :rotateRel, :class => 'input-medium' %></div>
+    				</div>
+					</div>
+				</div>
+			<% end %>
+		</div>
+
+<div class="tab-pane" id="actions"> 
+	<% @hotspot.interactions.each.with_index do |interaction, index|%>
+		<%= f.fields_for :interactions, interaction do |builder| %>
+			<% if interaction == @interaction %>
+				<h3 class="">New Action</h3>
+			<% else %>
+				<h3>Action <%= index + 1 %>
+					<div class="form-inline">
+ 	  				<%= builder.check_box :_destroy %>
+   		 			<%= builder.label :_destroy, "Delete Action" %>
+  				</div>
+				</h3>		
+			<% end # interaction if  %>
+
+		<div class="row">
+			<div class="span4">	
+    		<div class="control-group">
+        	<%= builder.label :label, :class => 'control-label' %>
+					<div class="controls"><%= builder.text_field :label, :class => 'input-medium' %></div>
+    		</div>
+    
+    		<div class="control-group">
+      		<%= builder.label :uri, 'URI', :class => 'control-label' %>
+      		<div class="controls">
+        	<!-- <select class='input-small'>
+          <option value="http://">http://</option>
+          <option value="https://">https://</option>
+          <option value="tel:">tel:</option>
+          <option value="mailto:">mailto:</option>
+          <option value="sms:">sms:</option>
+          <option value="layar://">layar://</option>
+          <option value="layarshare://">layarshare://</option>
+          <option value=""></option>
+        	</select> -->
+        		<%= builder.text_field :uri, :class => 'input-medium' %>
+      		</div>
+    		</div>
+    
+    		<div class="control-group">
+      		<% contentTypes = { 
+        		"HTML" => "text/html", "Text" => "text/plain",
+        		"Audio MPEG" => "audio/mpeg", "Audio MP4" => "audio/mp4", 
+        		"Video MP4" => "video/mp4", "Video 3GPP" => "video/3gpp",
+        		"Internal Custom Call" => "application/vnd.layar.internal"
+      		} %>
+      		<%= builder.label :contentType, 'Content Type', :class => 'control-label' %>
+      		<div class="controls"><%= builder.select :contentType, contentTypes, {}, {:class => "input-medium"} %></div>
+    		</div>
+
+    		<div class="control-group"> 
+    			<% activityTypes = { 
+      			"Info"        =>  "1", "Audio"              =>  "2", "Video"          =>  "3", "Call"             =>  "4",
+						"Email"       =>  "5", "Position/Map"       =>  "6", "Add"            =>  "7", "Remove"           =>  "8",
+    			  "Edit"        =>  "9", "Collect"            => "10", "Play"           => "11", "Make Move"        => "12",
+   			  	"Share"       => "13", "Pin on Map"         => "14", "Check In/Out"   => "15", "Log In/Out"       => "16",
+     				"Lock/Unlock" => "17", "List/Scores"        => "18", "Money/Pay/Buy"  => "19", "Open"             => "20",
+    				"Close"       => "21", "Search"             => "22", "Update"         => "23", "Layer"            => "24",
+      			"Yes"         => "25", "Increase/Decrease"  => "26", "View/Examine"   => "27", "Add to Favorites" => "28",
+      			"Kill/Hit"    => "29", "Heal"               => "30", "Defend"         => "31", "Repair"           => "32",
+      			"Use/Switch"  => "33", "Animate"            => "34", "Scoreboard"     => "35", "Generic Action"   => "36",
+      			"No"          => "37"
+   			 	} %>
+      		<%= builder.label :activityType, 'Activity Type', :class => 'control-label' %>
+      		<div class="controls"><%= builder.select :activityType, activityTypes, {}, {:class => "input-medium"} %></div>
+    		</div>
+			</div> <!-- End first column -->
+	
+			<div class="span2">
+    		<div class="control-group"> 
+      		<%= builder.label :showActivity, 'Show Activity', :class => 'control-label' %>
+      		<div class="controls"><%= builder.check_box :showActivity %></div>
+    		</div>
+    
+    		<div class="control-group"> 
+      		<%= builder.label :closeBiw, 'Close BIW', :class => 'control-label' %>
+      		<div class="controls"><%= builder.check_box :closeBiw %></div>
+    		</div>
+    
+    		<div class="control-group"> 
+      		<%= builder.label :autoTrigger, 'Auto Trigger', :class => 'control-label' %>
+      		<div class="controls"><%= builder.check_box :autoTrigger %></div>
+    		</div>
+    
+    		<div class="control-group"> 
+      		<%= builder.label :autoTriggerOnly, 'Auto Trigger Only', :class => 'control-label' %>
+      		<div class="controls"><%= builder.check_box :autoTriggerOnly %></div>
+    		</div>
+			</div> <!-- End second column -->
+
+    	<div class="span4">
+				<div class="control-group">
+    			<% methods = { "GET" => "GET", "POST" => "POST" } %>
+      		<%= builder.label :method, :class => 'control-label' %>
+      		<div class="controls"><%= builder.select :method, methods, {}, {:class => "input-medium"} %></div>
+    		</div>
+
+    		<div class="control-group"> 
+      		<%= builder.label :params, :class => 'control-label' %>
+      		<div class="controls"><%= builder.text_field :params, :class => 'input-medium' %></div>
+    		</div>
+        
+    		<div class="control-group"> 
+      		<%= builder.label :activityMessage, 'Activity Message', :class => 'control-label' %>
+      		<div class="controls"><%= builder.text_field :activityMessage, :class => 'input-medium' %></div>
+    		</div>
+				
+    		<div class="control-group"> 
+      		<%= builder.label :autoTriggerRange, 'Auto Trigger Range', :class => 'control-label' %>
+      		<div class="controls"><%= builder.text_field :autoTriggerRange, :class => 'input-medium'%></div>
+    		</div>
+			</div> <!-- End third column -->
+		</div> <!-- End Actions Row -->
+	<% end %>
+  <% end %>
+  
+	</div>
+</div>
+  <%= f.submit :class => "btn" %>
+  <%= link_to "Cancel", layer_path(@layer), :class => "btn btn-danger" %>
+
+<% end %>

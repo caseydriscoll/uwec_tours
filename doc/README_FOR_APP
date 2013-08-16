@@ -1,0 +1,201 @@
+Layar on Rails
+Version 0.1
+Built for Layar API version 6.2
+Built on Ruby 1.8.7 and Rails 3.2.6
+
+Table of Contents
+1. Introduction
+  1.1 What does this app do?
+  1.2 How does this app work?
+  1.3 What is this app made of?
+2. Development
+3. Testing
+4. Installation
+5. Models
+  5.1 Layers
+  5.2 Hotspots
+  5.3 Hotspot_objects
+  5.3 Objects
+  5.4 Actions
+  5.5 Animations
+6. Controllers
+7. Views
+8. Attributions
+9. Roadmap
+
+
+1. INTRODUCTION
+
+  This app was created by Casey Driscoll at the University of Wisconsin-Eau Claire in the summer of 2012 for use by their Admissions Department. It was open sourced on github after acknowledging the following request and is released under the MIT license. 
+    
+    >> @caseydriscoll caseypatrickdriscoll@me.com
+    >> github link
+    >> http://devsupport.layar.com/entries/20178733-ruby-on-rails-poi-server
+  
+  1.1 WHAT DOES THIS APP DO?
+      
+      This app stores "Layar" brand augmented reality layers and returns the appropriate .json when requested. It also provides a rich GUI to allow non-technical users to create robust feature-rich layers.
+      
+  1.2 HOW DOES THIS APP WORK?
+  
+      REQUEST
+      
+      A client device (smartphone, tablet) using the Layar app requests points of information from this app with a specific "GetPOIs Request" as listed on the Layar Docs. It is an HTTP GET request in the form: 
+      
+        http://<poiUrl>?<parameters>
+        
+      Here is a sample request as listed on the Layar website:
+      
+        http://devAPI.example.com/getPOIs/?countryCode=IN&lon=4.887339&userId=ed48067cda8e1b985dbb8ff3653a2da4fd490a37 &radius=6245&lat=52.377544&layerName=snowy4&accuracy=100
+        
+      RESPONSE
+      
+      The app then responds with a .json output, an example is given in doc/JSON_RESPONSE_EXAMPLE taken from the Layar API
+      
+        >> http://layar.com/documentation/browser/api/getpois-request/
+        >> http://layar.com/documentation/browser/api/getpois-response/
+  
+  1.3 WHAT IS THIS APP MADE OF?
+  
+      This app has 5 models:
+    
+      :layers       - Top level, including name and type of layer
+      :hotspots     - Points of information level, including BIW and GPS Coordinates 
+      :objects      - Table of 2D and/or 3D objects and their 'transform' properties. 
+                    - Optional one-to-one existance with hotspots only
+      :actions      - Table of available user actions and their destinations
+                    - Optional many-to-one existance with both layers and hotspots (both layers and hotspots can have many actions). Formatting is the same for both layers actions and hotspot actions.
+      :animations   - Table of available animations events and their properties
+                    - Optional many-to-one existance with both layers and hotspots (both layers and hotspots can have many animations). Formatting is the same for both layers animations and hotspot animations.
+
+2. DEVELOPMENT
+
+3. TESTING
+
+4. INSTALLATION
+
+5. MODELS
+
+  The commands used to create the 5 models are listed in doc/schema.txt
+  
+  Full response schema is listed at
+  
+  >> http://www.layar.com/documentation/browser/api/getpois-response/
+  
+  However, not all response code is stored in the database. Some is calculated, and some is generated in code based on calculations.
+
+  5.1 LAYERS
+  
+      A layer typically contains many hotspots, and may contain a default action or animation for entire layer.
+  
+      :layers
+        :layer_name       :string             Unique name.
+        :layer_type       :string             Choice between "visual" (camera based) and "geo" (location based)
+        :radius           :float        [opt]
+        :refreshInterval  :integer
+        :refreshDistance  :integer
+        :fullRefresh      :boolean      
+        :showMessage      :string
+        :title            :string
+        :description      :string
+        :iconUrl          :string
+        :biwStyle         :string       [opt] Choice between "classic" and "collapsed"
+          
+  5.2 HOTSPOTS
+  
+      Hotspots are the bulk of the app. Full schema is listed here:
+      
+      >> http://www.layar.com/documentation/browser/api/getpois-response/hotspots/
+  
+      :hotspots
+        :layer_id         :integer [fk]       The layer the hotspot belongs to.
+        :latitude         :float              Latitude to 6 decimal points
+        :longitude        :float              Longitude to 6 decimal points
+        :altitude         :float        [opt] Height in meters above sea level
+        :title            :string             Limit to 60 characters
+        :description      :string       [opt] Limit to 140 characters
+        :footnote         :string       [opt] Limit to 45 characters
+        :image_url        :string       [opt] Link to thumbnail image, 100x75 pixels
+        :showSmallBiw     :boolean      [opt] Decides whether a small BIW dialog should be shown on focus (default: true)
+        :showBiwOnClick   :boolean      [opt] Decides whether a small BIW dialog should be shown on click (default: true)
+        :biwStyle         :string       [opt] Choice between "classic" and "collapsed"
+        :ciwIcon_url      :string       [opt] URL for custom icon
+        :ciwIcon_type     :string       [opt] I don't really understand this, check the docs
+        :hotspot_object_id:integer [fk] [opt] Link to external entry if hotspot has an object
+        :inFocus          :boolean      [opt] Check the Layar docs (default false)
+  
+  5.3 OBJECTS
+    
+      This table stores "object" and "transform" dictionary information which optionally exists at a one-to-one relationship with hotspots. Objects was moved to its own table because of the infrequency of its use. Full schema listed here:
+      
+      >> http://layar.com/documentation/browser/api/getpois-response/hotspots/#hotspots-object
+          
+      :objects
+        :hotspot_id       :integer [fk] [opt]
+        :contentType      :string
+        :object_url       :string
+        :size             :float
+        :reducedUrl       :string
+        :previewImage     :string
+        :rotateRel        :boolean      [opt] (default false)
+        :rotateAxisX      :float
+        :rotateAxisY      :float
+        :rotateAxisZ      :float
+        :rotateAngle      :float
+        :translateX       :float
+        :translateY       :float
+        :translateZ       :float
+        :scale            :float
+        
+  5.4 ACTIONS
+  
+      :actions
+        :layer_id         :integer [fk] [opt]
+        :hotspot_id       :integer [fk] [opt]
+        :uri              :string
+        :label            :string
+        :contentType      :string
+        :method           :string
+        :params           :string
+        :activityType     :integer
+        :showActivity     :boolean
+        :activityMessage  :string
+        :closeBiw         :boolean
+        :autoTriggerRange :integer
+        :autoTrigger      :boolean
+        :autoTriggerOnly  :boolean
+  
+  5.5 ANIMATIONS
+  
+      :animations
+        :layer_id           :integer [fk] [opt]
+        :hotspot_id         :integer [fk] [opt]
+        :event              :string             "on" event for complex animations on[Create,Update,Delete,Focus,Click]
+        :type               :string             either simple (drop/grow/spin) or complex (rotate/scale/translate) types
+        :length             :integer
+        :delay              :integer
+        :interpolationParam :float
+        :interpolation      :string
+        :persist            :boolean
+        :repeat             :boolean
+        :from               :float
+        :to                 :float
+        :axisX              :float
+        :axisY              :float
+        :axisZ              :float
+          
+6. CONTROLLERS
+
+7. VIEWS
+
+8. ATTRIBUTIONS
+
+	8.1 GOOGLE MAPS PICKER
+
+		http://wimagguc.hu/projects/jquery-latitude-longitude-picker-gmaps/
+
+9. ROADMAP
+  
+  9.1 KNOWN BUGS
+    
+      [ ] Actions are not available for showDialog under the layer level

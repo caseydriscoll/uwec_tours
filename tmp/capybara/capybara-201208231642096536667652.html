@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Layar</title>
+<link href="/assets/bootstrap.css" media="screen" rel="stylesheet" type="text/css">
+<link href="/assets/application.css" media="screen" rel="stylesheet" type="text/css">
+<script src="/assets/application.js" type="text/javascript"></script>
+</head>
+<body>
+    <div class="container">
+      <div class="navbar">
+  <div class="navbar-inner">
+    <ul class="nav nav-pills">
+<li><a href="/layers">Layers</a></li>
+<span class="divider">&gt;</span>
+      <li class="active"><a href="/layers/1">Test Layer</a></li>
+    </ul>
+</div>
+</div>
+
+<h2>Hotspots
+  <a href="/layers/1/hotspots/new" class="btn btn-success">
+    <i class="icon-plus icon-white"></i> Add Hotspot
+</a>
+</h2>
+
+
+<table class="table table-bordered table-striped">
+<tr>
+<th>Title</th>
+    <th style="width:100px;">Footnote</th>
+    <th>Latitude</th>
+    <th>Longitute</th>
+    <th>Elevation</th>
+    <th style="width:110px;">Image</th>
+    <th style="width:200px;">Description</th>
+    <th></th>
+  </tr>
+<tr>
+<td>Hotspot 1</td>
+    <td></td>
+    <td>100.0</td>
+    <td>100.0</td>
+    <td> m</td>
+    <td>
+      <img src="" width="100px" height="75px" class="img-polaroid">
+</td>
+    <td></td>
+    <td id="hotspotActions" class="btn-group btn-group-vertical">
+      <a href="/layers/1/hotspots/1" class="btn btn-primary btn-small">Show</a>
+      <a href="/layers/1/hotspots/1/edit" class="btn btn-warning btn-small">Edit</a>
+      <a href="/layers/1/hotspots/1" class="btn btn-danger btn-small" data-method="delete" rel="nofollow">Delete</a>
+    </td>
+  </tr>
+<tr>
+<td>Hotspot 2</td>
+    <td></td>
+    <td>100.0</td>
+    <td>100.0</td>
+    <td> m</td>
+    <td>
+      <img src="" width="100px" height="75px" class="img-polaroid">
+</td>
+    <td></td>
+    <td id="hotspotActions" class="btn-group btn-group-vertical">
+      <a href="/layers/1/hotspots/2" class="btn btn-primary btn-small">Show</a>
+      <a href="/layers/1/hotspots/2/edit" class="btn btn-warning btn-small">Edit</a>
+      <a href="/layers/1/hotspots/2" class="btn btn-danger btn-small" data-method="delete" rel="nofollow">Delete</a>
+    </td>
+  </tr>
+</table>
+<h2>Action</h2>
+<h2>Animation</h2>
+
+
+    </div>
+  </body>
+</html>

@@ -1,0 +1,117 @@
+<div class="navbar">
+  <div class="navbar-inner">
+    <ul class="nav nav-pills">
+      <li><a href="<%= layers_path %>">Layers</a></li><span class="divider">></span>
+      <li class="active"><a href="<%= edit_layer_path(@layer) %>"><span class="label label-warning pull-left">EDIT</span><%= @layer.name %></a>
+    </ul>
+  </div>
+</div>
+
+<div class="row">
+  <%= form_for @layer, :html => { :class => "form-horizontal"} do |f| %>
+    <div class="span4">
+      <div class="well well-small">
+        Editing 
+      </div>
+    </div>
+    <div class="span8">
+
+      <div class="row">
+        <div class="span4">
+
+          <div class="control-group">
+            <%= f.label :name, :class => 'control-label' %>
+            <div class="controls">
+              <%= f.text_field :name, :class => "input-medium" %>
+            </div>
+          </div>
+
+          <div class="control-group">
+            <label class="control-label">Layer Type</label>
+            <div class="controls">
+              <label class="radio inline"><%= f.radio_button :layer_type, "Geo" %>Geo</label>
+              <label class="radio inline"><%= f.radio_button :layer_type, "Visual" %>Visual</label>
+            </div>
+          </div>
+
+          <div class="control-group">
+            <%= f.label :radius, :class => 'control-label' %>
+            <div class="controls">
+              <%= f.text_field :radius, :class => "input-medium" %>
+            </div>
+          </div>
+
+          <div class="control-group">
+            <%= f.label :refreshInterval, "Refresh Interval", :class => 'control-label' %>
+            <div class="controls">
+              <%= f.text_field :refreshInterval, :class => "input-medium" %>
+            </div>
+          </div>
+          
+          <div class="control-group">
+            <%= f.label :refreshDistance, "Refresh Distance", :class => 'control-label' %>
+            <div class="controls">
+              <%= f.text_field :refreshDistance, :class => "input-medium" %>
+            </div>
+          </div>
+
+          <div class="control-group">
+            <%= f.label :fullRefresh, "Full Refresh", :class => 'control-label' %>
+            <div class="controls">
+              <%= f.check_box :fullRefresh %>
+            </div>
+          </div>
+
+
+          <%= f.submit 'Update Layer', :class => 'btn btn-primary' %>
+          <a href="<%= layers_path() %>" class="btn btn-danger">Cancel</a>
+
+        </div>
+        <div class="span4">
+          
+          <div class="control-group">
+            <% biwStyles = { "Classic" => "classic", "Collapsed" => "collapsed" } %>
+            <%= f.label :biwStyle, "BIW Style", :class => 'control-label' %>
+            <div class="controls">
+              <%= f.select :biwStyle, biwStyles, {}, {:class => "input-medium"} %>
+            </div>
+          </div>
+
+          <div class="control-group">
+            <%= f.label :showMessage, "Show Message", :class => 'control-label' %>
+            <div class="controls">
+              <%= f.text_field :showMessage, :class => "input-medium" %>
+            </div>
+          </div>
+
+          <div class="control-group">
+            <%= f.label :title, :class => 'control-label' %>
+            <div class="controls">
+              <%= f.text_field :title, :class => "input-medium" %>
+            </div>
+          </div>
+
+          <div class="control-group">
+            <%= f.label :iconUrl, "Icon URL", :class => 'control-label' %>
+            <div class="controls">
+              <%= f.text_field :iconUrl, :class => "input-medium" %>
+            </div>
+          </div>
+
+          <div class="control-group">
+            <%= f.label :description, :class => 'control-label' %>
+            <div class="controls">
+              <%= f.text_area :description, :rows => "4", :class => "input-medium" %>
+            </div>
+          </div>
+
+
+        </div>
+      </div>
+
+    </div>
+
+
+  <% end %>
+
+</div>

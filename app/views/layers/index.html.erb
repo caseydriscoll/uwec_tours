@@ -1,0 +1,91 @@
+<div class="navbar">
+  <div class="navbar-inner">
+    <ul class="nav nav-pills">
+      <li class="active"><a href="<%= layers_path %>">All Layers</a></li>
+    </ul>
+		<div class="btn-group pull-right">
+    	<button href="" class="btn btn-info" data-toggle="button">
+      	<i class="icon-info-sign icon-white"></i>  Tips
+    	</button>
+    	<a href="/help" class="btn btn-info">Help Docs</a>
+		</div>
+  </div>
+</div>
+
+<% if notice %>
+    <div class="alert alert-success"><%= notice %></div>
+<% end %>
+
+<div class='row'>
+  <div class='span4'>
+
+  <%= form_for @layer, :html => { :class => ""} do |f| %>
+    
+    <% if @layer.errors.any? %>
+      <div class="alert alert-error">
+      <h4>Error!</h4>
+        <ul class=''>
+          <% @layer.errors.full_messages.each do |msg| %>
+            <li><%= msg %></li>
+          <% end %>
+        </ul>
+      </div>
+      <% else %>
+      <% end %>
+    
+
+    <div class='input-append well well-small'>
+      <%= f.text_field :name, :placeholder => "Add a New Layer", :class => 'input-medium' %>
+      <%= f.submit 'Create Layer', :class => "btn btn-success" %>
+    </div>
+  <% end %>
+    <div class="alert alert-info">
+      <h2>Get Started:</h2>
+			<p>Three pieces are needed to successfully publish a virtual tour:</p>
+			<ol>
+				<li>
+					<h4>Hotspot Database</h4>
+					<p>Using this web application, create a layer and add hotspots to its 'show' page.
+					The information created there will be added to the layer's json page.</p>
+				</li>
+				<li>
+					<h4>Layar.com Publication</h4>
+					<p>Create a layer at <a href="http://layar.com" target="_blank">Layar.com</a> and after completing the requirements, request publication.</p>
+				</li>
+				<li>
+					<h4>Static Web Server</h4>
+					<p>This database only holds the minimum amount of information. Additional interactivity (photos, images, audio) must be stored on another webserver.</p>
+				</li>
+			</ol>
+			<p>Read the <a href="/help">Help Docs</a> for tutorials and more information.</p>
+    </div>
+  </div>
+
+  <div class='span8'>
+    <table class='table table-bordered'>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Hotspots</th>
+      <th>Actions</th>
+      <th>Animations</th>
+      <th>
+    </tr>
+
+    <% for layer in @layers %>
+    <tr id="layer_<%= layer.id %>">
+      <td><h3><%= layer.name %></h3></td>
+      <td><h3><%= layer.layer_type %></h3></td>
+      <td class="hotspots"><h1><%= layer.hotspots.count %></h1></td>
+			<td class="actions"><h1><%= layer.interactions.count %></h1></td>
+			<td class="animations"><h1><%= layer.animations.count %></h1></td>
+      <td class="btns">
+        <%= link_to 'Add Info', layer_path(layer), html_options = { :class => "btn btn-success btn-mini" } %>
+        <%= link_to 'Edit Meta', edit_layer_path(layer), html_options = { :class => "btn btn-warning btn-mini" } %>
+				<%= link_to 'Delete', layer, :data => { :confirm => "Are you sure you want to delete '#{layer.name}'?" }, :method => :delete, :class => "btn btn-danger btn-mini" %>
+      </td>
+    </tr>
+    <% end -%>
+    </table>
+  </div>
+</div>

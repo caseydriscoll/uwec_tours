@@ -1,0 +1,105 @@
+<div class="navbar">
+  <div class="navbar-inner">
+    <ul class="nav nav-pills">
+      <li><a href="<%= layers_path %>">Layers</a></li><span class="divider">></span>
+      <li class="active"><a href="<%= layer_path(@layer) %>"><%= @layer.name %></a></li>
+    </ul>
+		<div class="btn-group pull-right">
+    	<button href="" class="btn btn-info" data-toggle="button">
+      	<i class="icon-info-sign icon-white"></i>  Tips
+    	</button>
+    	<a href="" class="btn btn-info">Help Docs</a>
+		</div>
+    <a href="<%= layer_path(@layer) + '.json' %>" style="margin-right:10px;" target="_blank" class="btn pull-right">
+      <i class="icon-align-justify"></i> .json
+    </a>
+  </div>
+</div>
+
+<% if notice %>
+    <div class="alert alert-success"><%= notice %></div>
+<% end %>
+
+<h2><%= @layer.hotspots.count %> Hotspots
+  <%= link_to( new_layer_hotspot_path(@layer), :class => "btn btn-success" ) do %>
+    <i class="icon-plus icon-white"></i> Add Hotspot
+  <% end %>
+</h2>
+
+
+<table class="table table-bordered table-striped">
+  <tr>
+    <th style="width:110px;"></th>
+    <th>Title - Footnote</th>
+    <th style="max-width:155px;">Coordinates</th>
+    <th style="width:200px;">Description</th>
+    <th></th>
+  </tr>
+
+<% @layer.hotspots.each do |hotspot| %>
+  <tr id="hotspot_<%= hotspot.id %>">
+    <td>
+			<% 	
+				if(!hotspot.image_url.blank?) 
+					imgSRC = hotspot.image_url
+				else
+					imgSRC = "http://placehold.it/100x75"
+				end
+			%>
+      <img src="<%= imgSRC %>" width="100px" height="75px" class="img-polaroid"/>
+    </td>
+    <td class="title">
+				<h2><%= hotspot.title %></h2>
+    		<h5><%= hotspot.footnote %></h5>
+		</td>
+    <td class="lyshow latlon">
+				<dl class="dl-horizontal">
+					<dt>Lat:</dt><dd><%= hotspot.latitude %></dd></h4>
+					<dt>Lon:</dt><dd><%= hotspot.longitude %></dd></h4>
+					<% if !hotspot.altitude.blank? %>
+						<dt>Alt:</dt><dd><%= hotspot.altitude %></dd></h4>
+					<% end %>
+				</dl>
+		</td>
+    <td><%= hotspot.description %></td>
+    <td id="hotspotActions" class="btns">
+      <%= link_to 'Show', layer_hotspot_path(@layer, hotspot), html_options = { :class => "btn btn-primary btn-mini" } %>
+      <%= link_to 'Edit', edit_layer_hotspot_path(@layer, hotspot), html_options = { :class => "btn btn-warning btn-mini" } %>
+			<%= link_to 'Delete', layer_hotspot_path(@layer, hotspot), :data => { :confirm => "Are you sure you want to delete '#{hotspot.title}'?" }, :method => :delete, :class => "btn btn-danger btn-mini" %>
+    </td>
+  </tr>
+<% end %>
+</table>
+
+<h2><%= @layer.interactions.count %> Actions
+  <%= link_to( new_layer_interaction_path(@layer), :class => "btn btn-success" ) do %>
+    <i class="icon-plus icon-white"></i> Add Action
+  <% end %>
+</h2>
+
+<table class="table table-bordered table-striped">
+  <tr>
+    <th>Label</th>
+    <th style="width:200px;">URI</th>
+    <th>Content Type</th>
+    <th>Method</th>
+    <th style="width:100px;"></th>
+  </tr>
+
+<% @layer.interactions.each do |interaction| %>
+  <tr id="interaction_<%= interaction.id %>">
+    <td><%= interaction.label %></td>
+    <td><%= interaction.uri %></td>
+    <td><%= interaction.contentType %></td>
+    <td><%= interaction.method %></td>
+    <td id="interactionActions" class="btn-group">
+      <%= link_to 'Show', layer_interaction_path(@layer, interaction), html_options = { :class => "btn btn-primary btn-mini" } %>
+      <%= link_to 'Edit', edit_layer_interaction_path(@layer, interaction), html_options = { :class => "btn btn-warning btn-mini" } %>
+      <%= link_to 'Delete', layer_interaction_path(@layer, interaction), :method => 'delete', :class => "btn btn-danger btn-mini" %>
+    </td>
+  </tr>
+<% end %>
+</table>
+
+<h2>Animations</h2>
+

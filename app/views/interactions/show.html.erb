@@ -1,0 +1,24 @@
+<div class="navbar">
+  <div class="navbar-inner">
+    <ul class="nav nav-pills">
+      <li><a href="<%= layers_path %>">Layers</a></li><span class="divider">></span>
+      <li><a href="<%= layer_path(@layer) %>"><%= @layer.name %></a></li><span class="divider">></span> 
+      <li class="active"><a href="<%= layer_interaction_path(@layer, @interaction) %>"><span class="label label-info pull-left">SHOW</span> '<%= @interaction.label %>' Action</a></li>
+    </ul>
+  </div>
+</div>
+
+<% if notice %>
+    <div class="alert alert-success"><%= notice %></div>
+<% end %>
+
+<div class="row">
+  <div class="span6">
+    <h2>Action</h2>
+    <dl class="dl-horizontal">
+        <dt>Label:</dt>             <dd><%= @interaction.label %></dd>
+        <dt>URI:</dt>               <dd><%= @interaction.uri %></dd>
+    </dl>
+  </div>
+</div>
+<%= link_to "Back to Layer", layer_path(@layer), :class => 'btn' %>

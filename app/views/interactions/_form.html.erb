@@ -1,0 +1,134 @@
+<% if notice %>
+    <div class="alert alert-success"><%= notice %></div>
+<% end %>
+
+<%= form_for [@interactionable, @interaction], :html => { :class => "form-horizontal"} do |f| %>
+  <% if @interaction.errors.any? %>
+    <div id="error_explanation" class="alert alert-error">
+      <ul>
+      <% @interaction.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="control-group">
+    <%= f.label :label, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :label %>
+    </div>
+  </div>
+  
+  <div class="control-group">
+    <%= f.label :uri, 'URI', :class => 'control-label' %>
+    <div class="controls">
+      <!-- <select class='input-small'>
+        <option value="http://">http://</option>
+        <option value="https://">https://</option>
+        <option value="tel:">tel:</option>
+        <option value="mailto:">mailto:</option>
+        <option value="sms:">sms:</option>
+        <option value="layar://">layar://</option>
+        <option value="layarshare://">layarshare://</option>
+        <option value=""></option>
+      </select> -->
+      <%= f.text_field :uri %>
+    </div>
+  </div>
+  
+  <div class="control-group">
+    <% contentTypes = { 
+      "HTML" => "text/html", "Text" => "text/html",
+      "Audio MPEG" => "audio/mpeg", "Audio MP4" => "audio/mp4", 
+      "Video MP4" => "video/mp4", "Video 3GPP" => "video/3gpp",
+      "Internal Custom Call" => "application/vnd.layar.internal"
+    } %>
+    <%= f.label :contentType, 'Content Type', :class => 'control-label' %>
+    <div class="controls">
+      <%= f.select :contentType, contentTypes, {}, {:class => ""} %>
+    </div>
+  </div>
+
+  <div class="control-group"> 
+  <% activityTypes = { 
+    "Info"        =>  "1", "Audio"              =>  "2", "Video"          =>  "3", "Call"             =>  "4",
+    "Email"       =>  "5", "Position/Map"       =>  "6", "Add"            =>  "7", "Remove"           =>  "8",
+    "Edit"        =>  "9", "Collect"            => "10", "Play"           => "11", "Make Move"        => "12",
+    "Share"       => "13", "Pin on Map"         => "14", "Check In/Out"   => "15", "Log In/Out"       => "16",
+    "Lock/Unlock" => "17", "List/Scores"        => "18", "Money/Pay/Buy"  => "19", "Open"             => "20",
+    "Close"       => "21", "Search"             => "22", "Update"         => "23", "Layer"            => "24",
+    "Yes"         => "25", "Increase/Decrease"  => "26", "View/Examine"   => "27", "Add to Favorites" => "28",
+    "Kill/Hit"    => "29", "Heal"               => "30", "Defend"         => "31", "Repair"           => "32",
+    "Use/Switch"  => "33", "Animate"            => "34", "Scoreboard"     => "35", "Generic Action"   => "36",
+    "No"          => "37"
+  } %>
+    <%= f.label :activityType, 'Activity Type', :class => 'control-label' %>
+    <div class="controls">
+      <%= f.select :activityType, activityTypes, {}, {:class => ""} %>
+    </div>
+  </div>
+
+  <h3>Optional Settings</h3>
+
+  <div class="control-group">
+  <% methods = { "GET" => "GET", "POST" => "POST" } %>
+    <%= f.label :method, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.select :method, methods, {}, {:class => ""} %>
+    </div>
+  </div>
+
+  <div class="control-group"> 
+    <%= f.label :params, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :params %>
+    </div>
+  </div>
+  
+  <div class="control-group"> 
+    <%= f.label :showActivity, 'Show Activity', :class => 'control-label' %>
+    <div class="controls">
+      <%= f.check_box :showActivity %>
+    </div>
+  </div>
+  
+  <div class="control-group"> 
+    <%= f.label :activityMessage, 'Activity Message', :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :activityMessage %>
+    </div>
+  </div>
+  
+  <div class="control-group"> 
+    <%= f.label :closeBiw, 'Close BIW', :class => 'control-label' %>
+    <div class="controls">
+      <%= f.check_box :closeBiw %>
+    </div>
+  </div>
+  
+  <div class="control-group"> 
+    <%= f.label :autoTriggerRange, 'Auto Trigger Range', :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :autoTriggerRange %>
+    </div>
+  </div>
+  
+  <div class="control-group"> 
+    <%= f.label :autoTrigger, 'Auto Trigger', :class => 'control-label' %>
+    <div class="controls">
+      <%= f.check_box :autoTrigger %>
+    </div>
+  </div>
+  
+  <div class="control-group"> 
+    <%= f.label :autoTriggerOnly, 'Auto Trigger Only', :class => 'control-label' %>
+    <div class="controls">
+      <%= f.check_box :autoTriggerOnly %>
+    </div>
+  </div>
+  
+  <%= f.submit :class => "btn" %>
+  <%= link_to "Cancel", layer_path(@layer), :class => "btn btn-danger" %>
+
+<% end %>

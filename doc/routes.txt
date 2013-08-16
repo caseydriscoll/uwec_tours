@@ -1,0 +1,49 @@
+                    layer_actions GET    /layers/:layer_id/actions(.:format)                                       actions#index
+                                  POST   /layers/:layer_id/actions(.:format)                                       actions#create
+                 new_layer_action GET    /layers/:layer_id/actions/new(.:format)                                   actions#new
+                edit_layer_action GET    /layers/:layer_id/actions/:id/edit(.:format)                              actions#edit
+                     layer_action GET    /layers/:layer_id/actions/:id(.:format)                                   actions#show
+                                  PUT    /layers/:layer_id/actions/:id(.:format)                                   actions#update
+                                  DELETE /layers/:layer_id/actions/:id(.:format)                                   actions#destroy
+                 layer_animations GET    /layers/:layer_id/animations(.:format)                                    animations#index
+                                  POST   /layers/:layer_id/animations(.:format)                                    animations#create
+              new_layer_animation GET    /layers/:layer_id/animations/new(.:format)                                animations#new
+             edit_layer_animation GET    /layers/:layer_id/animations/:id/edit(.:format)                           animations#edit
+                  layer_animation GET    /layers/:layer_id/animations/:id(.:format)                                animations#show
+                                  PUT    /layers/:layer_id/animations/:id(.:format)                                animations#update
+                                  DELETE /layers/:layer_id/animations/:id(.:format)                                animations#destroy
+    layer_hotspot_hotspot_objects GET    /layers/:layer_id/hotspots/:hotspot_id/hotspot_objects(.:format)          hotspot_objects#index
+                                  POST   /layers/:layer_id/hotspots/:hotspot_id/hotspot_objects(.:format)          hotspot_objects#create
+ new_layer_hotspot_hotspot_object GET    /layers/:layer_id/hotspots/:hotspot_id/hotspot_objects/new(.:format)      hotspot_objects#new
+edit_layer_hotspot_hotspot_object GET    /layers/:layer_id/hotspots/:hotspot_id/hotspot_objects/:id/edit(.:format) hotspot_objects#edit
+     layer_hotspot_hotspot_object GET    /layers/:layer_id/hotspots/:hotspot_id/hotspot_objects/:id(.:format)      hotspot_objects#show
+                                  PUT    /layers/:layer_id/hotspots/:hotspot_id/hotspot_objects/:id(.:format)      hotspot_objects#update
+                                  DELETE /layers/:layer_id/hotspots/:hotspot_id/hotspot_objects/:id(.:format)      hotspot_objects#destroy
+            layer_hotspot_actions GET    /layers/:layer_id/hotspots/:hotspot_id/actions(.:format)                  actions#index
+                                  POST   /layers/:layer_id/hotspots/:hotspot_id/actions(.:format)                  actions#create
+         new_layer_hotspot_action GET    /layers/:layer_id/hotspots/:hotspot_id/actions/new(.:format)              actions#new
+        edit_layer_hotspot_action GET    /layers/:layer_id/hotspots/:hotspot_id/actions/:id/edit(.:format)         actions#edit
+             layer_hotspot_action GET    /layers/:layer_id/hotspots/:hotspot_id/actions/:id(.:format)              actions#show
+                                  PUT    /layers/:layer_id/hotspots/:hotspot_id/actions/:id(.:format)              actions#update
+                                  DELETE /layers/:layer_id/hotspots/:hotspot_id/actions/:id(.:format)              actions#destroy
+         layer_hotspot_animations GET    /layers/:layer_id/hotspots/:hotspot_id/animations(.:format)               animations#index
+                                  POST   /layers/:layer_id/hotspots/:hotspot_id/animations(.:format)               animations#create
+      new_layer_hotspot_animation GET    /layers/:layer_id/hotspots/:hotspot_id/animations/new(.:format)           animations#new
+     edit_layer_hotspot_animation GET    /layers/:layer_id/hotspots/:hotspot_id/animations/:id/edit(.:format)      animations#edit
+          layer_hotspot_animation GET    /layers/:layer_id/hotspots/:hotspot_id/animations/:id(.:format)           animations#show
+                                  PUT    /layers/:layer_id/hotspots/:hotspot_id/animations/:id(.:format)           animations#update
+                                  DELETE /layers/:layer_id/hotspots/:hotspot_id/animations/:id(.:format)           animations#destroy
+                   layer_hotspots GET    /layers/:layer_id/hotspots(.:format)                                      hotspots#index
+                                  POST   /layers/:layer_id/hotspots(.:format)                                      hotspots#create
+                new_layer_hotspot GET    /layers/:layer_id/hotspots/new(.:format)                                  hotspots#new
+               edit_layer_hotspot GET    /layers/:layer_id/hotspots/:id/edit(.:format)                             hotspots#edit
+                    layer_hotspot GET    /layers/:layer_id/hotspots/:id(.:format)                                  hotspots#show
+                                  PUT    /layers/:layer_id/hotspots/:id(.:format)                                  hotspots#update
+                                  DELETE /layers/:layer_id/hotspots/:id(.:format)                                  hotspots#destroy
+                           layers GET    /layers(.:format)                                                         layers#index
+                                  POST   /layers(.:format)                                                         layers#create
+                        new_layer GET    /layers/new(.:format)                                                     layers#new
+                       edit_layer GET    /layers/:id/edit(.:format)                                                layers#edit
+                            layer GET    /layers/:id(.:format)                                                     layers#show
+                                  PUT    /layers/:id(.:format)                                                     layers#update
+                                  DELETE /layers/:id(.:format)                                                     layers#destroy

@@ -1,0 +1,166 @@
+<div class="navbar">
+  <div class="navbar-inner">
+    <ul class="nav nav-pills">
+      <li><a href="<%= layers_path %>">Layers</a></li><span class="divider">></span>
+      <li><a href="<%= layer_path(@layer) %>"><%= @layer.name %></a></li><span class="divider">></span>
+      <li class="active"><a href="<%= layer_hotspot_path(@layer, @hotspot) %>"><span class="label label-info pull-left">SHOW</span> '<%= @hotspot.title %>' Hotspot</a></li>
+    </ul>
+		<div class="btn-group pull-right">
+    	<button href="" class="btn btn-info" data-toggle="button">
+      	<i class="icon-info-sign icon-white"></i>  Tips
+    	</button>
+    	<a href="" class="btn btn-info">Help Docs</a>
+		</div>
+  </div>
+</div>
+
+<% if notice %>
+    <div class="alert alert-success"><%= notice %></div>
+<% end %>
+
+<h2>Hotspot
+	<div class="pull-right">
+  <%= link_to( new_layer_hotspot_path(@layer), :class => "btn btn-success" ) do %>
+    <i class="icon-plus icon-white"></i> Add
+  <% end %>
+  <%= link_to( edit_layer_hotspot_path(@layer, @hotspot), :class => "btn btn-warning" ) do %>
+    Edit
+  <% end %>
+	<%= button_to 'Delete', layer_hotspot_path(@layer, @hotspot), :method => 'delete', :class => "btn btn-danger" %>
+	</div>
+</h2>
+<table class="table table-bordered table-striped">
+  <tr>
+    <th style="width:110px;"></th>
+    <th>Title - Footnote</th>
+    <th style="width:254px;">Coordinates</th>
+    <th style="width:184px;">Description</th>
+  </tr>
+
+  <tr id="hotspot_<%= @hotspot.id %>">
+    <td>
+				<% 	
+					if(!@hotspot.image_url.blank?) 
+						imgSRC = @hotspot.image_url
+					else
+						imgSRC = "http://placehold.it/100x75"
+					end
+				%>
+      	<img src="<%= imgSRC %>" width="100px" height="75px" class="img-polaroid"/>
+		</td>
+    <td class="title">
+				<h2><%= @hotspot.title %></h2>
+    		<h5><%= @hotspot.footnote %></h5>
+		</td>
+    <td class="hsshow latlon">
+				<dl class="dl-horizontal">
+					<dt>Latitude:</dt><dd><%= @hotspot.latitude %></dd></h4>
+					<dt>Longitude:</dt><dd><%= @hotspot.longitude %></dd></h4>
+					<% if !@hotspot.altitude.blank? %>
+						<dt>Altitude:</dt><dd><%= @hotspot.altitude %></dd></h4>
+					<% end %>
+				</dl>
+		</td>
+		<td>
+			<%= @hotspot.description %>
+		</td>
+</table>
+<div class="row">
+	<div class="span12">
+		<fieldset class="thumbnail pull-right gllpLatlonPicker">
+			<div class="gllpMap">Google Maps</div>
+			<input type="hidden" class="gllpLatitude" value="<%= @hotspot.latitude %>"/>
+			<input type="hidden" class="gllpLongitude" value="<%= @hotspot.longitude %>"/>
+			<input type="hidden" class="gllpZoom" value="16"/>
+		</fieldset>
+
+		<h4>Optional Settings</h4>
+		<dl class="dl-horizontal pull-left hsinfo">
+        <dt>Show Small BIW:</dt>    <dd><%= @hotspot.showSmallBiw %></dd>
+        <dt>Show BIW on Click:</dt>    <dd><%= @hotspot.showBiwOnClick %></dd>
+        <dt>BIW Style:</dt>          <dd><%= @hotspot.biwStyle %></dd>
+        <dt>CIW Icon URL:</dt>       <dd><%= @hotspot.ciwIcon_url %></dd>
+        <dt>CIW Icon Type:</dt>      <dd><%= @hotspot.ciwIcon_type %></dd>
+        <dt>inFocus:</dt>           <dd><%= @hotspot.inFocus %></dd>
+    </dl>
+	</div>
+</div>
+
+<ul class="nav nav-tabs" id="hotspottabs">
+	<li><a href="#object" data-toggle="tab"><h4><%= if !@hotspot.hotspot_object.blank? then "1 Object" else "0 Objects" end %></h4></a></li>
+	<li><a href="#actions" data-toggle="tab"><h4><%= @hotspot.interactions.count %> Action<%= if @hotspot.interactions.count != 1 then "s" end %></h4></a></li>
+	<li><a href="#animations" data-toggle="tab"><h4>Animations</h4></a></li>
+</ul>
+
+<div class="row">
+	<div class="span12 tab-content">
+		<div class="tab-pane" id="object">
+		<% if @object then %>
+			<h3>Object</h3>
+				<dl class="dl-horizontal span11">
+					<dt>Full URL:</dt>		       	<dd><%= @object.hotspot_object_url %></dd>
+					<dt>Reduced URL:</dt>       	<dd><%= @object.reducedUrl %></dd>
+				</dl>
+      <div class="row">
+				<dl class="dl-horizontal span4">
+					<dt>Content Type:</dt>       	<dd><%= @object.contentType %></dd>
+					<dt>Size:</dt> 				      	<dd><%= @object.size %></dd>
+					<dt>Preview Image:</dt>       <dd><%= @object.previewImage %></dd>
+				</dl>
+				<dl class="dl-horizontal span3">
+					<dt>Translate X:</dt>       	<dd><%= @object.translateX %></dd>
+					<dt>Translate Y:</dt> 				<dd><%= @object.translateY %></dd>
+					<dt>Translate Z:</dt>       	<dd><%= @object.translateZ %></dd>
+					<dt>Scale:</dt>				 	     	<dd><%= @object.scale %></dd>
+				</dl>
+				<dl class="dl-horizontal span4">
+					<dt>Rotate Axis X:</dt>       <dd><%= @object.rotateAxisX %></dd>
+					<dt>Rotate Axis Y:</dt> 			<dd><%= @object.rotateAxisY %></dd>
+					<dt>Rotate Axis Z:</dt>       <dd><%= @object.rotateAxisZ %></dd>
+					<dt>Rotate Angle:</dt>       	<dd><%= @object.rotateAngle %></dd>
+					<dt>Rotation Rel:</dt>   <dd><%= @object.rotateRel %></dd>
+				</dl>
+			</div>
+		<% end %>
+		</div>
+		<div class="tab-pane" id="actions">
+			<% @hotspot.interactions.each.with_index do |interaction, index| %>
+			<h3>Action <%= index + 1 %></h3>
+			<div class="row">
+				<div class="span10 offset1">
+					<dl class="dl-horizontal pull-left hsinfo">
+        		<dt>Action Label:</dt>       	<dd><%= interaction.label%></dd>
+						<dt>URI:</dt> 		          	<dd>
+																							<a href="<%= interaction.uri %>" target="_blank">
+																								<%= interaction.uri %>
+																							</a>		
+																					</dd>
+					</dl>
+					<dl class="dl-horizontal pull-left hsinfo">
+       			<dt>Content Type:</dt>      	<dd><%= interaction.contentType %></dd>
+        		<dt>Activity Type:</dt>    		<dd><%= interaction.activityType %></dd>
+        		<dt>Show Activity:</dt>    	 	<dd><%= interaction.showActivity %></dd>
+        		<dt>Activity Message:</dt> 		<dd><%= interaction.activityMessage %></dd>
+        		<dt>Method:</dt>            	<dd><%= interaction.method %></dd>
+					</dl>
+					<dl class="dl-horizontal pull-left hsinfo">
+        		<dt>Params:</dt>            	<dd><%= interaction.params %></dd>
+        		<dt>Close BIW:</dt>       	  <dd><%= interaction.closeBiw %></dd>
+        		<dt>Auto Trigger Range:</dt>  <dd><%= interaction.autoTriggerRange %></dd>
+        		<dt>Auto Trigger:</dt>        <dd><%= interaction.autoTrigger %></dd>
+        		<dt>Auto Trigger Only:</dt>   <dd><%= interaction.autoTriggerOnly %></dd>
+    			</dl>
+				</div>
+			</div> <!-- End each action row -->
+			<% end %>
+		</div>
+	</div>
+</div>
+
+<h2>
+<%= link_to "Back to Layer", layer_path(@layer), :class => 'btn' %>
+  <%= link_to( edit_layer_hotspot_path(@layer, @hotspot), :class => "btn btn-warning" ) do %>
+    Edit Hotspot
+  <% end %>
+	<%= button_to 'Delete Hotspot', layer_hotspot_path(@layer, @hotspot), :method => 'delete', :class => "btn btn-danger" %>
+</h2>

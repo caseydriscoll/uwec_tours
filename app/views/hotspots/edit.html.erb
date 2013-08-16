@@ -1,0 +1,17 @@
+<div class="navbar">
+  <div class="navbar-inner">
+    <ul class="nav nav-pills">
+      <li><a href="<%= layers_path %>">Layers</a></li><span class="divider">></span>
+      <li><a href="<%= layer_path(@layer) %>"><%= @layer.name %></a></li><span class="divider">></span>
+      <li class="active"><a href="<%= layer_hotspot_path(@layer, @hotspot) %>"><span class="label label-warning pull-left">EDIT</span>'<%= @hotspot.title %>' Hotspot</a></li>
+    </ul>
+		<div class="btn-group pull-right">
+    	<button href="" class="btn btn-info" data-toggle="button">
+      	<i class="icon-info-sign icon-white"></i>  Tips
+    	</button>
+    	<a href="" class="btn btn-info">Help Docs</a>
+		</div>
+  </div>
+</div>
+
+<%= render :partial => "form" %>

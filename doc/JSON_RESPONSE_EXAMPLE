@@ -1,0 +1,13 @@
+{"hotspots": [{
+   "id": "test_1",
+   "anchor": { "geolocation": { "lat": 52.3729, "lon": 4.93 } },  
+   "text": {
+     "title": "The Layar Office", 
+     "description": "The Location of the Layar Office", 
+     "footnote": "Powered by Layar" },
+ "imageURL": "http:\/\/custom.layar.nl\/layarimage.jpeg",
+ }], 
+ "layer": "snowy4",
+ "errorString": "ok", 
+ "errorCode": 0
+} 
